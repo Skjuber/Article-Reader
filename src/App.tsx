@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import axios from "axios";
 
 interface Article {
   title: string;
@@ -7,27 +7,33 @@ interface Article {
   publishedAt: Date;
 }
 
-class App extends Component {
-  state = {
-    articles: [
-      {
-        title: "Article 1",
-        category: "Technology",
-        publishedAt: new Date(),
-      },
-      {
-        title: "Article 2",
-        category: "Business",
-        publishedAt: new Date(),
-      },
-      {
-        title: "Article 3",
-        category: "Sports",
-        publishedAt: new Date(),
-      },
-    ],
-    favorites: [],
-  };
+class App extends Component<{}, { articles: Article[]; favorites: Article[] }> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      articles: [],
+      favorites: [],
+    };
+  }
+
+  componentDidMount() {
+    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=cb1423ece681450bb3f49a1d996b915f`;
+
+    axios
+      .get(url)
+      .then((response) => {
+        const articles = response.data.articles.map((article: any) => ({
+          title: article.title,
+          category: article.source.name,
+          publishedAt: new Date(article.publishedAt),
+        }));
+
+        this.setState({ articles });
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  }
 
   handleClick = (article: Article) => {
     this.setState({
