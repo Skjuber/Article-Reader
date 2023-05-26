@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+
 interface Article {
   title: string;
   category: string;
@@ -35,23 +36,38 @@ class App extends Component {
   };
 
   render() {
+    const articlesByCategory = this.state.articles.reduce<{
+      [key: string]: Article[];
+    }>((groups, article) => {
+      const category = article.category;
+      if (!groups[category]) {
+        groups[category] = [];
+      }
+      groups[category].push(article);
+      return groups;
+    }, {});
+
     return (
       <div>
         <h1>Newsy</h1>
-        <div>
-          <ul>
-            {this.state.articles.map((article, index) => (
-              <li key={index}>
-                <h2>{article.title}</h2>
-                <p>{article.category}</p>
-                <p>{article.publishedAt.toString()}</p>
-                <button onClick={() => this.handleClick(article)}>
-                  Bookmark
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {Object.entries(articlesByCategory).map(
+          ([category, articles], index) => (
+            <div key={index}>
+              <h2>{category}</h2>
+              <ul>
+                {(articles as Article[]).map((article, index) => (
+                  <li key={index}>
+                    <h3>{article.title}</h3>
+                    <p>{article.publishedAt.toString()}</p>
+                    <button onClick={() => this.handleClick(article)}>
+                      Bookmark
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        )}
       </div>
     );
   }
