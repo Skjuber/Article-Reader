@@ -55,7 +55,7 @@ class App extends Component<{}, { articles: Article[]; favorites: Article[] }> {
 
     return (
       <div>
-        <h1>Newsy</h1>
+        <h1>NewsyY</h1>
         {Object.entries(articlesByCategory).map(
           ([category, articles], index) => (
             <div key={index}>
