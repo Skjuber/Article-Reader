@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "./store";
+
 import { Article } from "./App";
 
 interface LatestNewsProps {
@@ -10,10 +9,6 @@ interface LatestNewsProps {
 const LatestNews: React.FC<LatestNewsProps> = ({ allArticles }) => {
   const [displayedArticles, setDisplayedArticles] = useState<Article[]>([]);
   const [remainingArticles, setRemainingArticles] = useState<Article[]>([]);
-
-  const favoriteArticles = useSelector(
-    (state: RootState) => state.favoriteArticles.value
-  );
 
   useEffect(() => {
     setDisplayedArticles(allArticles.slice(0, 10));
@@ -46,14 +41,6 @@ const LatestNews: React.FC<LatestNewsProps> = ({ allArticles }) => {
           <li key={index}>
             <h3>{article.title}</h3>
             <p>{article.publishedAt.toString()}</p>
-            <button
-              onClick={() => {
-                // Add the article to favorites
-                // You can dispatch an action to your favoriteArticlesSlice here
-              }}
-            >
-              Add to Favorites
-            </button>
           </li>
         ))}
       </ul>

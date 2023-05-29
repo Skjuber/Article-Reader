@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Routes, Route, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,6 +6,7 @@ import Category from "./Category";
 import LatestNews from "./LatestNews";
 import { addArticle, removeArticle } from "./FavoriteArticlesSlice";
 import { RootState } from "./store";
+import _ from "lodash";
 
 export interface Article {
   title: string;
@@ -18,6 +19,7 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [displayedArticles, setDisplayedArticles] = useState<Article[]>([]);
   const [remainingArticles, setRemainingArticles] = useState<Article[]>([]);
+
   const favorites = useSelector(
     (state: RootState) => state.favoriteArticles.value
   );
@@ -67,8 +69,20 @@ const App = () => {
     return groups;
   }, {});
 
+  const debouncedSearch = useCallback(
+    _.debounce((query) => {
+      console.log(2);
+      setSearchQuery(query);
+    }, 200),
+    []
+  );
+
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
+    event.stopPropagation();
+
+    console.log(1);
+
+    debouncedSearch(event.target.value);
   };
 
   // Load more articles when user scrolls to bottom
@@ -96,7 +110,6 @@ const App = () => {
       <input
         type="text"
         placeholder="Search articles"
-        value={searchQuery}
         onChange={handleSearchChange}
       />
       <Routes>
