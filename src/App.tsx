@@ -26,15 +26,15 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=cb1423ece681450bb3f49a1d996b915f`;
+    const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7hEQKkyr9wQu1oS7rhrDLPG7psTxzfGQ`;
 
     axios
       .get(url)
       .then((response) => {
-        const articles = response.data.articles.map((article: any) => ({
-          title: article.title,
-          category: article.source.name,
-          publishedAt: new Date(article.publishedAt),
+        const articles = response.data.response.docs.map((doc: any) => ({
+          title: doc.headline.main,
+          category: doc.section_name,
+          publishedAt: new Date(doc.pub_date),
         }));
 
         setArticles(articles);
