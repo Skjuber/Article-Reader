@@ -15,11 +15,10 @@ const LatestNews: React.FC<LatestNewsProps> = ({ allArticles }) => {
   }, []);
 
   const fetchMoreData = () => {
-    const moreArticles = allArticles.slice(
-      displayedArticles.length,
-      displayedArticles.length + 10
-    );
-    setDisplayedArticles(displayedArticles.concat(moreArticles));
+    let startIndex = displayedArticles.length % allArticles.length;
+    let endIndex = startIndex + 10;
+    const moreArticles = allArticles.slice(startIndex, endIndex);
+    setDisplayedArticles([...displayedArticles, ...moreArticles]);
   };
 
   return (
@@ -28,13 +27,8 @@ const LatestNews: React.FC<LatestNewsProps> = ({ allArticles }) => {
       <InfiniteScroll
         dataLength={displayedArticles.length} // This is important field to render the next data
         next={fetchMoreData}
-        hasMore={displayedArticles.length < allArticles.length}
+        hasMore={true}
         loader={<h4>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
       >
         <ul>
           {displayedArticles.map((article: Article, index: number) => (
