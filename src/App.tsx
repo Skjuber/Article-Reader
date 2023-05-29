@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 interface Article {
@@ -7,16 +7,11 @@ interface Article {
   publishedAt: Date;
 }
 
-class App extends Component<{}, { articles: Article[]; favorites: Article[] }> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      articles: [],
-      favorites: [],
-    };
-  }
+const App = () => {
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [favorites, setFavorites] = useState<Article[]>([]);
 
-  componentDidMount() {
+  useEffect(() => {
     const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=cb1423ece681450bb3f49a1d996b915f`;
 
     axios
@@ -28,55 +23,47 @@ class App extends Component<{}, { articles: Article[]; favorites: Article[] }> {
           publishedAt: new Date(article.publishedAt),
         }));
 
-        this.setState({ articles });
+        setArticles(articles);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
       });
-  }
+  }, []);
 
-  handleClick = (article: Article) => {
-    this.setState({
-      favorites: [...this.state.favorites, article],
-    });
+  const handleClick = (article: Article) => {
+    setFavorites([...favorites, article]);
   };
 
-  render() {
-    const articlesByCategory = this.state.articles.reduce<{
-      [key: string]: Article[];
-    }>((groups, article) => {
-      const category = article.category;
-      if (!groups[category]) {
-        groups[category] = [];
-      }
-      groups[category].push(article);
-      return groups;
-    }, {});
+  const articlesByCategory = articles.reduce<{
+    [key: string]: Article[];
+  }>((groups, article) => {
+    const category = article.category;
+    if (!groups[category]) {
+      groups[category] = [];
+    }
+    groups[category].push(article);
+    return groups;
+  }, {});
 
-    return (
-      <div>
-        <h1>NewsyY</h1>
-        {Object.entries(articlesByCategory).map(
-          ([category, articles], index) => (
-            <div key={index}>
-              <h2>{category}</h2>
-              <ul>
-                {(articles as Article[]).map((article, index) => (
-                  <li key={index}>
-                    <h3>{article.title}</h3>
-                    <p>{article.publishedAt.toString()}</p>
-                    <button onClick={() => this.handleClick(article)}>
-                      Bookmark
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h1>Newsy</h1>
+      {Object.entries(articlesByCategory).map(([category, articles], index) => (
+        <div key={index}>
+          <h2>{category}</h2>
+          <ul>
+            {articles.map((article, index) => (
+              <li key={index}>
+                <h3>{article.title}</h3>
+                <p>{article.publishedAt.toString()}</p>
+                <button onClick={() => handleClick(article)}>Bookmark</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default App;
