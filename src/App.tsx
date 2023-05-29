@@ -47,7 +47,9 @@ const App = () => {
   }, []);
 
   const handleClick = (article: Article) => {
-    dispatch(addArticle(article));
+    if (!favorites.some((favorite) => favorite.title === article.title)) {
+      dispatch(addArticle(article));
+    }
   };
 
   const handleRemove = (article: Article) => {
@@ -71,7 +73,6 @@ const App = () => {
 
   const debouncedSearch = useCallback(
     _.debounce((query) => {
-      console.log(2);
       setSearchQuery(query);
     }, 200),
     []
@@ -79,9 +80,6 @@ const App = () => {
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation();
-
-    console.log(1);
-
     debouncedSearch(event.target.value);
   };
 
@@ -140,7 +138,9 @@ const App = () => {
                         <li key={index}>
                           <h3>{article.title}</h3>
                           <p>{article.publishedAt.toString()}</p>
-                          {favorites.includes(article) ? (
+                          {favorites.some(
+                            (favorite) => favorite.title === article.title
+                          ) ? (
                             <button onClick={() => handleRemove(article)}>
                               Remove
                             </button>
