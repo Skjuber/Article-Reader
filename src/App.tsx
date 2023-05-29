@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Routes, Route, Link } from "react-router-dom";
 import Category from "./Category";
+import LatestNews from "./LatestNews";
 
 export interface Article {
   title: string;
@@ -75,6 +76,7 @@ const App = () => {
                   </div>
                 )
               )}
+              <LatestNews allArticles={articles} />{" "}
             </div>
           }
         />
