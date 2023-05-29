@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Routes, Route, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import Category from "./Category";
 import LatestNews from "./LatestNews";
+import { addArticle } from "./FavoriteArticlesSlice";
+import { RootState } from "./store";
 
 export interface Article {
   title: string;
@@ -12,7 +15,10 @@ export interface Article {
 
 const App = () => {
   const [articles, setArticles] = useState<Article[]>([]);
-  const [favorites, setFavorites] = useState<Article[]>([]);
+  const favorites = useSelector(
+    (state: RootState) => state.favoriteArticles.value
+  );
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=cb1423ece681450bb3f49a1d996b915f`;
@@ -34,7 +40,7 @@ const App = () => {
   }, []);
 
   const handleClick = (article: Article) => {
-    setFavorites([...favorites, article]);
+    dispatch(addArticle(article));
   };
 
   const articlesByCategory = articles.reduce<{
@@ -56,6 +62,15 @@ const App = () => {
           path="/"
           element={
             <div>
+              <h2>Favorites</h2>
+              <ul>
+                {favorites.map((article, index) => (
+                  <li key={index}>
+                    <h3>{article.title}</h3>
+                    <p>{article.publishedAt.toString()}</p>
+                  </li>
+                ))}
+              </ul>
               {Object.entries(articlesByCategory).map(
                 ([category, articles], index) => (
                   <div key={index}>
@@ -76,7 +91,7 @@ const App = () => {
                   </div>
                 )
               )}
-              <LatestNews allArticles={articles} />{" "}
+              <LatestNews allArticles={articles} />
             </div>
           }
         />

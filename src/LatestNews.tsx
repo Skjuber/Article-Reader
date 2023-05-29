@@ -15,7 +15,24 @@ const LatestNews: React.FC<LatestNewsProps> = ({ allArticles }) => {
     setRemainingArticles(allArticles.slice(10));
   }, [allArticles]);
 
-  // TODO: Add scroll event listener to load more articles
+  // Load more articles when user scrolls to bottom
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 500
+      ) {
+        if (remainingArticles.length > 0) {
+          const moreArticles = remainingArticles.slice(0, 10);
+          setDisplayedArticles([...displayedArticles, ...moreArticles]);
+          setRemainingArticles(remainingArticles.slice(10));
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [displayedArticles, remainingArticles]);
 
   return (
     <div>
