@@ -5,7 +5,10 @@ interface FavoriteArticlesState {
   value: Article[];
 }
 
-const initialState: FavoriteArticlesState = { value: [] };
+// Load initial state from localStorage or set to an empty array
+const initialState: FavoriteArticlesState = {
+  value: JSON.parse(localStorage.getItem("favoriteArticles") || "[]"),
+};
 
 export const favoriteArticlesSlice = createSlice({
   name: "favoriteArticles",
@@ -13,11 +16,15 @@ export const favoriteArticlesSlice = createSlice({
   reducers: {
     addArticle: (state, action: PayloadAction<Article>) => {
       state.value.push(action.payload);
+      // Save to localStorage every time we add an article
+      localStorage.setItem("favoriteArticles", JSON.stringify(state.value));
     },
     removeArticle: (state, action: PayloadAction<Article>) => {
       state.value = state.value.filter(
         (article) => article.title !== action.payload.title
       );
+      // Save to localStorage every time we remove an article
+      localStorage.setItem("favoriteArticles", JSON.stringify(state.value));
     },
   },
 });
