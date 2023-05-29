@@ -1,6 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Article } from "./App";
+import { addArticle, removeArticle } from "./FavoriteArticlesSlice";
+import { RootState } from "./store";
+import { useSelector, useDispatch } from "react-redux";
 
 interface CategoryProps {
   articlesByCategory: { [key: string]: Article[] };
@@ -8,6 +11,19 @@ interface CategoryProps {
 
 const Category: React.FC<CategoryProps> = ({ articlesByCategory }) => {
   const { category } = useParams<{ category?: string }>();
+
+  const favorites = useSelector(
+    (state: RootState) => state.favoriteArticles.value
+  );
+  const dispatch = useDispatch();
+
+  const handleClick = (article: Article) => {
+    dispatch(addArticle(article));
+  };
+
+  const handleRemove = (article: Article) => {
+    dispatch(removeArticle(article));
+  };
 
   // Add a check for undefined category
   if (!category) {
@@ -29,6 +45,11 @@ const Category: React.FC<CategoryProps> = ({ articlesByCategory }) => {
           <li key={index}>
             <h3>{article.title}</h3>
             <p>{article.publishedAt.toString()}</p>
+            {favorites.includes(article) ? (
+              <button onClick={() => handleRemove(article)}>Remove</button>
+            ) : (
+              <button onClick={() => handleClick(article)}>Bookmark</button>
+            )}
           </li>
         ))}
       </ul>

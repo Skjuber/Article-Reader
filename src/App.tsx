@@ -4,7 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Category from "./Category";
 import LatestNews from "./LatestNews";
-import { addArticle } from "./FavoriteArticlesSlice";
+import { addArticle, removeArticle } from "./FavoriteArticlesSlice";
 import { RootState } from "./store";
 
 export interface Article {
@@ -43,6 +43,10 @@ const App = () => {
     dispatch(addArticle(article));
   };
 
+  const handleRemove = (article: Article) => {
+    dispatch(removeArticle(article));
+  };
+
   const articlesByCategory = articles.reduce<{
     [key: string]: Article[];
   }>((groups, article) => {
@@ -68,6 +72,9 @@ const App = () => {
                   <li key={index}>
                     <h3>{article.title}</h3>
                     <p>{article.publishedAt.toString()}</p>
+                    <button onClick={() => handleRemove(article)}>
+                      Remove
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -82,9 +89,15 @@ const App = () => {
                         <li key={index}>
                           <h3>{article.title}</h3>
                           <p>{article.publishedAt.toString()}</p>
-                          <button onClick={() => handleClick(article)}>
-                            Bookmark
-                          </button>
+                          {favorites.includes(article) ? (
+                            <button onClick={() => handleRemove(article)}>
+                              Remove
+                            </button>
+                          ) : (
+                            <button onClick={() => handleClick(article)}>
+                              Bookmark
+                            </button>
+                          )}
                         </li>
                       ))}
                     </ul>

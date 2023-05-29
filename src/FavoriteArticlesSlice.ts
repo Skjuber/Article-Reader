@@ -14,9 +14,14 @@ export const favoriteArticlesSlice = createSlice({
     addArticle: (state, action: PayloadAction<Article>) => {
       state.value.push(action.payload);
     },
+    removeArticle: (state, action: PayloadAction<Article>) => {
+      state.value = state.value.filter(
+        (article) => article.title !== action.payload.title
+      );
+    },
   },
 });
 
-export const { addArticle } = favoriteArticlesSlice.actions;
+export const { addArticle, removeArticle } = favoriteArticlesSlice.actions;
 
 export default favoriteArticlesSlice.reducer;
