@@ -15,6 +15,9 @@ export interface Article {
 
 const App = () => {
   const [articles, setArticles] = useState<Article[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [displayedArticles, setDisplayedArticles] = useState<Article[]>([]);
+  const [remainingArticles, setRemainingArticles] = useState<Article[]>([]);
   const favorites = useSelector(
     (state: RootState) => state.favoriteArticles.value
   );
@@ -33,6 +36,8 @@ const App = () => {
         }));
 
         setArticles(articles);
+        setDisplayedArticles(articles.slice(0, 10));
+        setRemainingArticles(articles.slice(10));
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
@@ -47,7 +52,11 @@ const App = () => {
     dispatch(removeArticle(article));
   };
 
-  const articlesByCategory = articles.reduce<{
+  const filteredArticles = articles.filter((article) =>
+    article.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const articlesByCategory = filteredArticles.reduce<{
     [key: string]: Article[];
   }>((groups, article) => {
     const category = article.category;
@@ -58,9 +67,38 @@ const App = () => {
     return groups;
   }, {});
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // Load more articles when user scrolls to bottom
+  const handleScroll = () => {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.body.offsetHeight - 500
+    ) {
+      if (remainingArticles.length > 0) {
+        const moreArticles = remainingArticles.slice(0, 10);
+        setDisplayedArticles([...displayedArticles, ...moreArticles]);
+        setRemainingArticles(remainingArticles.slice(10));
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [displayedArticles, remainingArticles]);
+
   return (
     <div>
       <h1>Newsy</h1>
+      <input
+        type="text"
+        placeholder="Search articles"
+        value={searchQuery}
+        onChange={handleSearchChange}
+      />
       <Routes>
         <Route
           path="/"
@@ -104,7 +142,7 @@ const App = () => {
                   </div>
                 )
               )}
-              <LatestNews allArticles={articles} />
+              <LatestNews allArticles={displayedArticles} />
             </div>
           }
         />
