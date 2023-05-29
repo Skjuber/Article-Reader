@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import { Article } from "./App";
 
@@ -8,43 +9,42 @@ interface LatestNewsProps {
 
 const LatestNews: React.FC<LatestNewsProps> = ({ allArticles }) => {
   const [displayedArticles, setDisplayedArticles] = useState<Article[]>([]);
-  const [remainingArticles, setRemainingArticles] = useState<Article[]>([]);
 
   useEffect(() => {
-    setDisplayedArticles(allArticles.slice(0, 10));
-    setRemainingArticles(allArticles.slice(10));
-  }, [allArticles]);
+    fetchMoreData();
+  }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 500
-      ) {
-        if (remainingArticles.length > 0) {
-          const moreArticles = remainingArticles.slice(0, 10);
-          setDisplayedArticles([...displayedArticles, ...moreArticles]);
-          setRemainingArticles(remainingArticles.slice(10));
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [displayedArticles, remainingArticles]);
+  const fetchMoreData = () => {
+    const moreArticles = allArticles.slice(
+      displayedArticles.length,
+      displayedArticles.length + 10
+    );
+    setDisplayedArticles(displayedArticles.concat(moreArticles));
+  };
 
   return (
     <div>
       <h1>Latest News</h1>
-      <ul>
-        {displayedArticles.map((article: Article, index: number) => (
-          <li key={index}>
-            <h3>{article.title}</h3>
-            <p>{article.publishedAt.toString()}</p>
-          </li>
-        ))}
-      </ul>
-      <p>Loading...</p>
+      <InfiniteScroll
+        dataLength={displayedArticles.length} // This is important field to render the next data
+        next={fetchMoreData}
+        hasMore={displayedArticles.length < allArticles.length}
+        loader={<h4>Loading...</h4>}
+        endMessage={
+          <p style={{ textAlign: "center" }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
+      >
+        <ul>
+          {displayedArticles.map((article: Article, index: number) => (
+            <li key={index}>
+              <h3>{article.title}</h3>
+              <p>{article.publishedAt.toString()}</p>
+            </li>
+          ))}
+        </ul>
+      </InfiniteScroll>
     </div>
   );
 };
