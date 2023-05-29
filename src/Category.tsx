@@ -45,7 +45,7 @@ const Category: React.FC<CategoryProps> = ({ articlesByCategory }) => {
           <li key={index}>
             <h3>{article.title}</h3>
             <p>{article.publishedAt.toString()}</p>
-            {favorites.includes(article) ? (
+            {favorites.some((favorite) => favorite.title === article.title) ? (
               <button onClick={() => handleRemove(article)}>Remove</button>
             ) : (
               <button onClick={() => handleClick(article)}>Bookmark</button>
