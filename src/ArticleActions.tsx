@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "./store";
+import { addArticle, removeArticle } from "./FavoriteArticlesSlice";
 import { Article } from "./App";
 
 interface ArticleActionsProps {
@@ -6,16 +9,26 @@ interface ArticleActionsProps {
 }
 
 const ArticleActions: React.FC<ArticleActionsProps> = ({ article }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const dispatch = useDispatch();
+
+  const isArticleFavorite = useSelector((state: RootState) =>
+    state.favoriteArticles.value.some(
+      (favorite) => favorite.title === article.title
+    )
+  );
 
   const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
+    if (isArticleFavorite) {
+      dispatch(removeArticle(article));
+    } else {
+      dispatch(addArticle(article));
+    }
   };
 
   return (
     <div>
       <button onClick={toggleFavorite}>
-        {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+        {isArticleFavorite ? "Remove from Favorites" : "Add to Favorites"}
       </button>
     </div>
   );
