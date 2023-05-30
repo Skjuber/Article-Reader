@@ -31,11 +31,17 @@ const App = () => {
     axios
       .get(url)
       .then((response) => {
-        const articles = response.data.response.docs.map((doc: any) => ({
+        let articles = response.data.response.docs.map((doc: any) => ({
           title: doc.headline.main,
           category: doc.section_name,
           publishedAt: new Date(doc.pub_date),
         }));
+
+        // Sorting articles in descending order (most recent first)
+        articles = articles.sort(
+          (a: Article, b: Article) =>
+            b.publishedAt.getTime() - a.publishedAt.getTime()
+        );
 
         setArticles(articles);
         setDisplayedArticles(articles.slice(0, 10));
