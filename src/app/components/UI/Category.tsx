@@ -1,12 +1,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { Article } from "../../App";
-import {
-  addArticle,
-  removeArticle,
-} from "../store/reducers/FavoriteArticlesSlice";
-import { RootState } from "../store/store";
-import { useSelector, useDispatch } from "react-redux";
+
 import ArticleActions from "../store/reducers/ArticleActions";
 
 interface CategoryProps {
@@ -15,19 +10,6 @@ interface CategoryProps {
 
 const Category: React.FC<CategoryProps> = ({ articlesByCategory }) => {
   const { category } = useParams<{ category?: string }>();
-
-  const favorites = useSelector(
-    (state: RootState) => state.favoriteArticles.value
-  );
-  const dispatch = useDispatch();
-
-  const handleClick = (article: Article) => {
-    dispatch(addArticle(article));
-  };
-
-  const handleRemove = (article: Article) => {
-    dispatch(removeArticle(article));
-  };
 
   // Add a check for undefined category
   if (!category) {

@@ -1,19 +1,23 @@
+// Colors
 $primary-color: #282c34;
 $secondary-color: #61dafb;
 $background-color: #f5f5f5;
 $text-color: #333;
 $button-color: #888;
-$button-hover-color: darken($button-color, 10%);
 $link-color: #337ab7;
-$link-hover-color: darken($link-color, 15%);
 $favorite-color: #ff6347;
 
+// Typography
+$font-family: Arial, sans-serif;
+
+// Body styles
 body {
   background-color: $background-color;
   color: $text-color;
-  font-family: Arial, sans-serif;
+  font-family: $font-family;
 }
 
+// Headings
 h1 {
   color: $primary-color;
 }
@@ -22,6 +26,7 @@ h2 {
   color: $secondary-color;
 }
 
+// Form input
 input[type="text"] {
   width: 80%;
   padding: 0.5em;
@@ -31,6 +36,7 @@ input[type="text"] {
   border-radius: 5px;
 }
 
+// Buttons
 button {
   color: $text-color;
   background-color: $button-color;
@@ -42,19 +48,21 @@ button {
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: $button-hover-color;
+    background-color: darken($button-color, 10%);
   }
 }
 
+// Links
 a {
   color: $link-color;
   text-decoration: none;
 
   &:hover {
-    color: $link-hover-color;
+    color: darken($link-color, 15%);
   }
 }
 
+// Lists
 ul {
   list-style: none;
   padding: 0;
@@ -69,6 +77,7 @@ li {
   }
 }
 
+// Additional styles
 .favorites {
   color: $favorite-color;
 }
