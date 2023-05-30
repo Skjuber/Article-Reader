@@ -4,8 +4,11 @@ import { Routes, Route, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Category from "./components/Category";
 import LatestNews from "./components/LatestNews";
-import { addArticle, removeArticle } from "./FavoriteArticlesSlice";
-import { RootState } from "./store";
+import {
+  addArticle,
+  removeArticle,
+} from "./components/store/FavoriteArticlesSlice";
+import { RootState } from "./components/store/store";
 import _ from "lodash";
 import "./App.scss";
 
