@@ -41,6 +41,7 @@ const ArticleActions: React.FC<{ article: Article }> = ({ article }) => {
     <button
       onClick={handleClick}
       title={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+      className="article-action"
     >
       {isFavorite ? <FiMinus /> : <FiBookmark />}
     </button>
@@ -149,9 +150,11 @@ const App: React.FC = () => {
                 <ul>
                   {favorites.map((article, index) => (
                     <li key={index}>
-                      <h3>{article.title}</h3>
+                      <div className="article-header">
+                        <h3>{article.title}</h3>
+                        <ArticleActions article={article} />
+                      </div>
                       <p>{article.publishedAt.toString()}</p>
-                      <ArticleActions article={article} />
                     </li>
                   ))}
                 </ul>
@@ -166,9 +169,11 @@ const App: React.FC = () => {
                     <ul>
                       {articles.map((article, index) => (
                         <li key={index}>
-                          <h3>{article.title}</h3>
+                          <div className="article-header">
+                            <h3>{article.title}</h3>
+                            <ArticleActions article={article} />
+                          </div>
                           <p>{article.publishedAt.toString()}</p>
-                          <ArticleActions article={article} />
                         </li>
                       ))}
                     </ul>

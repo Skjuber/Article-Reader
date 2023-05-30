@@ -82,3 +82,12 @@ li {
   color: var(--favorite-color);
   padding-left: 6px;
 }
+
+.article-header {
+  display: flex;
+  align-items: center;
+}
+
+.article-action {
+  margin-left: 10px;
+}

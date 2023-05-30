@@ -83,4 +83,17 @@ li {
   color: var(--favorite-color);
   padding-left: 6px;
 }
+
+.article-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.article-action {
+  margin-left: 10px;
+}
 /*# sourceMappingURL=App.css.map */
