@@ -1,5 +1,9 @@
 # Article-Reader
 
+## Deployment
+
+Deployment of the application is avaiable on the following link: https://article-reader.vercel.app/
+
 ## Description
 
 Article-Reader is is a simple and user-friendly frontend application built using React and Sass/SCSS. It is designed to aggregate and display articles in an organized, categorized, and chronological order. You can browse, search, bookmark your favorite articles, and view them by category.
