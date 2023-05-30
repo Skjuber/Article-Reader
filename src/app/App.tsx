@@ -79,12 +79,6 @@ const App: React.FC = () => {
       });
   }, []);
 
-  const handleClick = (article: Article) => {
-    if (!favorites.some((favorite) => favorite.title === article.title)) {
-      dispatch(addArticle(article));
-    }
-  };
-
   const handleRemove = (article: Article) => {
     dispatch(removeArticle(article));
   };
