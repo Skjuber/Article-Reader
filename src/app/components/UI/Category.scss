@@ -1,3 +1,14 @@
 .categories-heading {
   color: var(--link-color);
 }
+
+.article-header.categories {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title.categories {
+  display: flex;
+  align-items: center;
+}
