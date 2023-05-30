@@ -11,6 +11,7 @@ import {
 import { RootState } from "./components/store/store";
 import Search from "./Search";
 import "./App.scss";
+import { FiBookmark, FiMinus } from "react-icons/fi";
 
 export interface Article {
   title: string;
@@ -34,9 +35,13 @@ const ArticleActions: React.FC<{ article: Article }> = ({ article }) => {
 
   return (
     <button onClick={handleClick}>
-      {favorites.some((favorite) => favorite.title === article.title)
-        ? "Remove from Favorites"
-        : "Add to Favorites"}
+      {
+        favorites.some((favorite) => favorite.title === article.title) ? (
+          <FiMinus /> // Already in favorites
+        ) : (
+          <FiBookmark />
+        ) // Not in favorites
+      }
     </button>
   );
 };
@@ -141,7 +146,7 @@ const App: React.FC = () => {
               <h2>Favorites</h2>
               {favorites.length === 0 ? (
                 <ul>
-                  <li>Your do not have any bookmarked articles!</li>
+                  <li>You do not have any bookmarked articles!</li>
                 </ul>
               ) : (
                 <ul>
