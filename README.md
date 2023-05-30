@@ -37,6 +37,8 @@ Visit http://localhost:3000 in your browser to view the application.
 
 # API Key
 
+To fetch articles from the New York Times API, you'll need to include your API Key. Create a `.env` file in the root directory and add your key:
+
 ### `REACT_APP_NYT_API_KEY=yourapikey`
 
 Replace 'yourapikey' with your actual API key from the New York Times.
