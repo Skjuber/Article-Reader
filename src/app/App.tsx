@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { Routes, Route, Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { RootState } from "./components/store/store";
 import Category from "./components/UI/Category";
-import LatestNews from "./components/UI/LatestNews";
-import ArticleActions from "./components/store/reducers/ArticleActions";
-import Search from "./Search";
+import Homepage from "./components/UI/Homepage";
+import Search from "./components/UI/Search";
 import "./App.scss";
 
 export interface Article {
@@ -106,48 +105,12 @@ const App: React.FC = () => {
         <Route
           path="/"
           element={
-            <div>
-              <h2>Favorites</h2>
-              {favorites.length === 0 ? (
-                <ul>
-                  <li>You do not have any bookmarked articles!</li>
-                </ul>
-              ) : (
-                <ul>
-                  {favorites.map((article, index) => (
-                    <li key={index}>
-                      <div className="article-header">
-                        <h3>{article.title}</h3>
-                        <ArticleActions article={article} />
-                      </div>
-                      <p>{article.publishedAt.toString()}</p>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <h1>Articles by category</h1>
-              {Object.entries(articlesByCategory).map(
-                ([category, articles], index) => (
-                  <div key={index}>
-                    <h2>
-                      <Link to={`/${category}`}>{category}</Link>
-                    </h2>
-                    <ul>
-                      {articles.map((article, index) => (
-                        <li key={index}>
-                          <div className="article-header">
-                            <h3>{article.title}</h3>
-                            <ArticleActions article={article} />
-                          </div>
-                          <p>{article.publishedAt.toString()}</p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )
-              )}
-              <LatestNews allArticles={displayedArticles} />
-            </div>
+            <Homepage
+              favorites={favorites}
+              articlesByCategory={articlesByCategory}
+              displayedArticles={displayedArticles}
+              handleSearch={handleSearch}
+            />
           }
         />
         <Route

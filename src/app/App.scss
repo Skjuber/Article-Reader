@@ -76,21 +76,3 @@ li {
   border-bottom: var(--primary-color) solid 1px;
   padding-left: 6px;
 }
-
-/* Additional styles */
-.favorites {
-  color: var(--favorite-color);
-  padding-left: 6px;
-}
-
-.article-header {
-  display: flex;
-  align-items: center;
-}
-
-.article-action {
-  border-radius: 10px;
-  margin-left: 10px;
-  background-color: var(--secondary-color);
-  color: var(--text-color);
-}

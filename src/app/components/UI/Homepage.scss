@@ -1,0 +1,11 @@
+.article-header {
+  display: flex;
+  align-items: center;
+}
+
+.article-action {
+  border-radius: 10px;
+  margin-left: 10px;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}

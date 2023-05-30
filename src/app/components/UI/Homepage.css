@@ -1,0 +1,16 @@
+.article-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.article-action {
+  border-radius: 10px;
+  margin-left: 10px;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+/*# sourceMappingURL=Homepage.css.map */
