@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "./store";
+import { RootState } from "../store";
 import { addArticle, removeArticle } from "./FavoriteArticlesSlice";
-import { Article } from "../../App";
+import { Article } from "../../../App";
 
 interface ArticleActionsProps {
   article: Article;

@@ -7,7 +7,7 @@ import LatestNews from "./components/LatestNews";
 import {
   addArticle,
   removeArticle,
-} from "./components/store/FavoriteArticlesSlice";
+} from "./components/store/reducers/FavoriteArticlesSlice";
 import { RootState } from "./components/store/store";
 import _ from "lodash";
 import "./App.scss";
