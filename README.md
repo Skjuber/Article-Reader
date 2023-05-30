@@ -49,4 +49,4 @@ MIT
 
 # Contact
 
-Ante Šimac-ante.frontend@gmail.com
+Ante Šimac- ante.frontend@gmail.com
