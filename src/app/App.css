@@ -9,7 +9,7 @@ h1 {
 }
 
 h2 {
-  color: #61dafb;
+  color: #f50057;
 }
 
 input[type="text"] {
@@ -38,12 +38,12 @@ button:hover {
 }
 
 a {
-  color: #337ab7;
+  color: #3f51b5;
   text-decoration: none;
 }
 
 a:hover {
-  color: #22527b;
+  color: #2b387c;
 }
 
 ul {
