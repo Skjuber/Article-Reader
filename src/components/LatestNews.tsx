@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { Article } from "./App";
+import { Article } from "../App";
 
 interface LatestNewsProps {
   allArticles: Article[];
@@ -15,8 +15,8 @@ const LatestNews: React.FC<LatestNewsProps> = ({ allArticles }) => {
   }, []);
 
   const fetchMoreData = () => {
-    let startIndex = displayedArticles.length % allArticles.length;
-    let endIndex = startIndex + 10;
+    const startIndex = displayedArticles.length % allArticles.length;
+    const endIndex = startIndex + 10;
     const moreArticles = allArticles.slice(startIndex, endIndex);
     setDisplayedArticles([...displayedArticles, ...moreArticles]);
   };

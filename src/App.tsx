@@ -3,7 +3,7 @@ import axios from "axios";
 import { Routes, Route, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Category from "./Category";
-import LatestNews from "./LatestNews";
+import LatestNews from "./components/LatestNews";
 import { addArticle, removeArticle } from "./FavoriteArticlesSlice";
 import { RootState } from "./store";
 import _ from "lodash";
