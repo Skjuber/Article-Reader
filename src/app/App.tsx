@@ -4,49 +4,16 @@ import { Routes, Route, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Category from "./components/UI/Category";
 import LatestNews from "./components/UI/LatestNews";
-import {
-  addArticle,
-  removeArticle,
-} from "./components/store/reducers/FavoriteArticlesSlice";
 import { RootState } from "./components/store/store";
 import Search from "./Search";
 import "./App.scss";
-import { FiBookmark, FiMinus } from "react-icons/fi";
+import ArticleActions from "./components/store/reducers/ArticleActions";
 
 export interface Article {
   title: string;
   category: string;
   publishedAt: Date;
 }
-
-const ArticleActions: React.FC<{ article: Article }> = ({ article }) => {
-  const favorites = useSelector(
-    (state: RootState) => state.favoriteArticles.value
-  );
-  const dispatch = useDispatch();
-
-  const handleClick = () => {
-    if (!favorites.some((favorite) => favorite.title === article.title)) {
-      dispatch(addArticle(article));
-    } else {
-      dispatch(removeArticle(article));
-    }
-  };
-
-  const isFavorite = favorites.some(
-    (favorite) => favorite.title === article.title
-  );
-
-  return (
-    <button
-      onClick={handleClick}
-      title={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
-      className="article-action"
-    >
-      {isFavorite ? <FiMinus /> : <FiBookmark />}
-    </button>
-  );
-};
 
 const App: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -71,7 +38,6 @@ const App: React.FC = () => {
           publishedAt: new Date(doc.pub_date),
         }));
 
-        // Sorting articles in descending order (most recent first)
         articles = articles.sort(
           (a: Article, b: Article) =>
             b.publishedAt.getTime() - a.publishedAt.getTime()
@@ -102,7 +68,6 @@ const App: React.FC = () => {
   }, {});
 
   const handleSearch = (query: string) => {
-    // Update the search query and filter the articles
     setSearchQuery(query);
   };
 
