@@ -15,7 +15,7 @@ export interface Article {
   publishedAt: Date;
 }
 
-const ArticleActions = ({ article }: { article: Article }) => {
+const ArticleActions: React.FC<{ article: Article }> = ({ article }) => {
   const favorites = useSelector(
     (state: RootState) => state.favoriteArticles.value
   );
@@ -38,7 +38,7 @@ const ArticleActions = ({ article }: { article: Article }) => {
   );
 };
 
-const App = () => {
+const App: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [displayedArticles, setDisplayedArticles] = useState<Article[]>([]);
@@ -102,7 +102,7 @@ const App = () => {
   }, {});
 
   const debouncedSearch = useCallback(
-    _.debounce((query) => {
+    _.debounce((query: string) => {
       setSearchQuery(query);
     }, 200),
     []
