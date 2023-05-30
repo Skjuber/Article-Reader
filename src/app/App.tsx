@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "./components/store/store";
 import Category from "./components/UI/Category";
 import Homepage from "./components/UI/Homepage";
-import Search from "./components/UI/Search";
 import "./App.scss";
 
 export interface Article {
@@ -30,11 +29,14 @@ const App: React.FC = () => {
     axios
       .get(url)
       .then((response) => {
-        let articles = response.data.response.docs.map((doc: any) => ({
-          title: doc.headline.main,
-          category: doc.section_name,
-          publishedAt: new Date(doc.pub_date),
-        }));
+        let articles = response.data.response.docs
+          // Filter if there is no Category.titel present in api
+          .filter((doc: any) => doc.section_name)
+          .map((doc: any) => ({
+            title: doc.headline.main,
+            category: doc.section_name,
+            publishedAt: new Date(doc.pub_date),
+          }));
 
         // Sorting articles in descending order (most recent first)
         articles = articles.sort(
@@ -98,27 +100,23 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Newsy</h1>
-      <Search onSearch={handleSearch} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Homepage
-              favorites={favorites}
-              articlesByCategory={articlesByCategory}
-              displayedArticles={displayedArticles}
-              handleSearch={handleSearch}
-            />
-          }
-        />
-        <Route
-          path="/:category"
-          element={<Category articlesByCategory={articlesByCategory} />}
-        />
-      </Routes>
-    </div>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <Homepage
+            favorites={favorites}
+            articlesByCategory={articlesByCategory}
+            displayedArticles={displayedArticles}
+            handleSearch={handleSearch}
+          />
+        }
+      />
+      <Route
+        path="/:category"
+        element={<Category articlesByCategory={articlesByCategory} />}
+      />
+    </Routes>
   );
 };
 
