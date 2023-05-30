@@ -12,12 +12,12 @@ Article-Reader employs the power of the New York Times API to fetch real-time an
 
 ## Features
 
--Homepage: Displays all articles grouped by categories and sorted chronologically.
--Latest news widget: Features infinite scroll functionality for seamless browsing.
--Category page: Every category is clickable, leading to a page displaying all articles from that specific category.
--Search filter: Allows users to search for articles by name.
--Bookmarking: Users can bookmark their favorite articles. This data is stored in the app state/browser storage.
--Favorites category: Bookmarking an article will add it to the 'Favorites' category on the homepage.
+- Homepage: Displays all articles grouped by categories and sorted chronologically.
+- Latest news widget: Features infinite scroll functionality for seamless browsing.
+- Category page: Every category is clickable, leading to a page displaying all articles from that specific category.
+- Search filter: Allows users to search for articles by name.
+- Bookmarking: Users can bookmark their favorite articles. This data is stored in the app state/browser storage.
+- Favorites category: Bookmarking an article will add it to the 'Favorites' category on the homepage.
 
 # Installation
 
