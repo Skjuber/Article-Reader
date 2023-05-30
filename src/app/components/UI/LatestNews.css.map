@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,YAAY,CAAC;EACX,gBAAgB,EAAE,OAAO;EACzB,KAAK,EAAE,IAAI;CAYZ;;AAdD,AAGE,YAHU,CAGV,EAAE,CAAC;EACD,KAAK,EAAE,OAAO;CACf;;AALH,AASM,YATM,CAOV,EAAE,CACA,EAAE,CACA,EAAE,CAAC;EACD,KAAK,EAAE,OAAO;CACf",
+    "sources": [
+        "LatestNews.scss"
+    ],
+    "names": [],
+    "file": "LatestNews.css"
+}
