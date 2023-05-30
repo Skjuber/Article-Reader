@@ -4,6 +4,7 @@ import { Article } from "./App";
 import { addArticle, removeArticle } from "./FavoriteArticlesSlice";
 import { RootState } from "./store";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 interface CategoryProps {
   articlesByCategory: { [key: string]: Article[] };
@@ -53,6 +54,7 @@ const Category: React.FC<CategoryProps> = ({ articlesByCategory }) => {
           </li>
         ))}
       </ul>
+      <Link to="/">Return to Home</Link>
     </div>
   );
 };
