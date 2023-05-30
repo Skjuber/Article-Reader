@@ -1,49 +1,74 @@
 $primary-color: #282c34;
 $secondary-color: #61dafb;
-$background-color: #f5f5f5; // Add this line
+$background-color: #f5f5f5;
+$text-color: #333;
+$button-color: #888;
+$button-hover-color: darken($button-color, 10%);
+$link-color: #337ab7;
+$link-hover-color: darken($link-color, 15%);
+$favorite-color: #ff6347;
 
-.App {
-  text-align: center;
+body {
+  background-color: $background-color;
+  color: $text-color;
+  font-family: Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-  animation: App-logo-spin infinite 20s linear;
+h1 {
+  color: $primary-color;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .App-logo {
-    animation: none;
-  }
-}
-
-.App-header {
-  background-color: $background-color; // Replace with the new background color
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
+h2 {
   color: $secondary-color;
+}
+
+input[type="text"] {
+  width: 80%;
+  padding: 0.5em;
+  margin: 0.5em auto;
+  display: block;
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+}
+
+button {
+  color: $text-color;
+  background-color: $button-color;
+  border: none;
+  padding: 0.5em;
   text-decoration: none;
-  transition: color 0.3s ease;
+  margin: 0.5em 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 
   &:hover {
-    color: darken($secondary-color, 10%);
+    background-color: $button-hover-color;
   }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+a {
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $link-hover-color;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 0.5em 0;
+  border-bottom: 1px solid $text-color;
+
+  &:last-child {
+    border-bottom: none;
   }
+}
+
+.favorites {
+  color: $favorite-color;
 }
