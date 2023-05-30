@@ -2,51 +2,18 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Routes, Route, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "./components/store/store";
 import Category from "./components/UI/Category";
 import LatestNews from "./components/UI/LatestNews";
-import {
-  addArticle,
-  removeArticle,
-} from "./components/store/reducers/FavoriteArticlesSlice";
-import { RootState } from "./components/store/store";
+import ArticleActions from "./components/store/reducers/ArticleActions";
 import Search from "./Search";
 import "./App.scss";
-import { FiBookmark, FiMinus } from "react-icons/fi";
 
 export interface Article {
   title: string;
   category: string;
   publishedAt: Date;
 }
-
-const ArticleActions: React.FC<{ article: Article }> = ({ article }) => {
-  const favorites = useSelector(
-    (state: RootState) => state.favoriteArticles.value
-  );
-  const dispatch = useDispatch();
-
-  const handleClick = () => {
-    if (!favorites.some((favorite) => favorite.title === article.title)) {
-      dispatch(addArticle(article));
-    } else {
-      dispatch(removeArticle(article));
-    }
-  };
-
-  const isFavorite = favorites.some(
-    (favorite) => favorite.title === article.title
-  );
-
-  return (
-    <button
-      onClick={handleClick}
-      title={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
-      className="article-action"
-    >
-      {isFavorite ? <FiMinus /> : <FiBookmark />}
-    </button>
-  );
-};
 
 const App: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -57,7 +24,6 @@ const App: React.FC = () => {
   const favorites = useSelector(
     (state: RootState) => state.favoriteArticles.value
   );
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7hEQKkyr9wQu1oS7rhrDLPG7psTxzfGQ`;
