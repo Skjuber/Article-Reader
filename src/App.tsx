@@ -7,6 +7,7 @@ import LatestNews from "./LatestNews";
 import { addArticle, removeArticle } from "./FavoriteArticlesSlice";
 import { RootState } from "./store";
 import _ from "lodash";
+import "./App.css";
 
 export interface Article {
   title: string;
