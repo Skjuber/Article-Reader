@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { Article } from "../../App";
-import "./LatestNews.scss";
 
 interface LatestNewsProps {
   allArticles: Article[];
@@ -23,7 +22,7 @@ const LatestNews: React.FC<LatestNewsProps> = ({ allArticles }) => {
   };
 
   return (
-    <div className="latest-news">
+    <div>
       <h1>Latest News</h1>
       <InfiniteScroll
         dataLength={displayedArticles.length} // This is important field to render the next data
