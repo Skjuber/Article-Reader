@@ -139,17 +139,24 @@ const App: React.FC = () => {
           element={
             <div>
               <h2>Favorites</h2>
-              <ul>
-                {favorites.map((article, index) => (
-                  <li key={index}>
-                    <h3>{article.title}</h3>
-                    <p>{article.publishedAt.toString()}</p>
-                    <button onClick={() => handleRemove(article)}>
-                      Remove
-                    </button>
-                  </li>
-                ))}
-              </ul>
+              {favorites.length === 0 ? (
+                <ul>
+                  <li>Your do not have any bookmarked articles!</li>
+                </ul>
+              ) : (
+                <ul>
+                  {favorites.map((article, index) => (
+                    <li key={index}>
+                      <h3>{article.title}</h3>
+                      <p>{article.publishedAt.toString()}</p>
+                      <button onClick={() => handleRemove(article)}>
+                        Remove
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <h1>Articles by category</h1>
               {Object.entries(articlesByCategory).map(
                 ([category, articles], index) => (
                   <div key={index}>
