@@ -30,6 +30,7 @@ const Category: React.FC<CategoryProps> = ({ articlesByCategory }) => {
             <div className="article-header categories">
               <div className="title categories">
                 <h3>{article.title}</h3>
+
                 <div className="bookmark-button categories">
                   <ArticleActions article={article} />
                 </div>

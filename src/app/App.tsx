@@ -30,7 +30,7 @@ const App: React.FC = () => {
       .get(url)
       .then((response) => {
         let articles = response.data.response.docs
-          // Filter if there is no Category.titel present in api
+          // Filter if there is no Category.title present in api
           .filter((doc: any) => doc.section_name)
           .map((doc: any) => ({
             title: doc.headline.main,
