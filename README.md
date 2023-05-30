@@ -19,7 +19,9 @@ Article-Reader employs the power of the New York Times API to fetch real-time an
 -Bookmarking: Users can bookmark their favorite articles. This data is stored in the app state/browser storage.
 -Favorites category: Bookmarking an article will add it to the 'Favorites' category on the homepage.
 
-# Instalation
+# Installation
+
+Clone the repository:
 
 ### `git clone https://github.com/yourusername/NewsFolio.git`
 
