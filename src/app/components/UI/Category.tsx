@@ -1,13 +1,13 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { Article } from "../App";
+import { Article } from "../../App";
 import {
   addArticle,
   removeArticle,
-} from "./store/reducers/FavoriteArticlesSlice";
-import { RootState } from "./store/store";
+} from "../store/reducers/FavoriteArticlesSlice";
+import { RootState } from "../store/store";
 import { useSelector, useDispatch } from "react-redux";
-import ArticleActions from "./store/reducers/ArticleActions";
+import ArticleActions from "../store/reducers/ArticleActions";
 
 interface CategoryProps {
   articlesByCategory: { [key: string]: Article[] };
