@@ -33,15 +33,16 @@ const ArticleActions: React.FC<{ article: Article }> = ({ article }) => {
     }
   };
 
+  const isFavorite = favorites.some(
+    (favorite) => favorite.title === article.title
+  );
+
   return (
-    <button onClick={handleClick}>
-      {
-        favorites.some((favorite) => favorite.title === article.title) ? (
-          <FiMinus /> // Already in favorites
-        ) : (
-          <FiBookmark />
-        ) // Not in favorites
-      }
+    <button
+      onClick={handleClick}
+      title={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+    >
+      {isFavorite ? <FiMinus /> : <FiBookmark />}
     </button>
   );
 };
@@ -83,10 +84,6 @@ const App: React.FC = () => {
         console.error("Error fetching data: ", error);
       });
   }, []);
-
-  const handleRemove = (article: Article) => {
-    dispatch(removeArticle(article));
-  };
 
   const filteredArticles = articles.filter((article) =>
     article.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -154,9 +151,7 @@ const App: React.FC = () => {
                     <li key={index}>
                       <h3>{article.title}</h3>
                       <p>{article.publishedAt.toString()}</p>
-                      <button onClick={() => handleRemove(article)}>
-                        Remove
-                      </button>
+                      <ArticleActions article={article} />
                     </li>
                   ))}
                 </ul>
