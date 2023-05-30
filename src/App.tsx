@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import { Routes, Route, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -7,13 +7,36 @@ import LatestNews from "./LatestNews";
 import { addArticle, removeArticle } from "./FavoriteArticlesSlice";
 import { RootState } from "./store";
 import _ from "lodash";
-import "./App.css";
+import "./App.scss";
 
 export interface Article {
   title: string;
   category: string;
   publishedAt: Date;
 }
+
+const ArticleActions = ({ article }: { article: Article }) => {
+  const favorites = useSelector(
+    (state: RootState) => state.favoriteArticles.value
+  );
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    if (!favorites.some((favorite) => favorite.title === article.title)) {
+      dispatch(addArticle(article));
+    } else {
+      dispatch(removeArticle(article));
+    }
+  };
+
+  return (
+    <button onClick={handleClick}>
+      {favorites.some((favorite) => favorite.title === article.title)
+        ? "Remove from Favorites"
+        : "Add to Favorites"}
+    </button>
+  );
+};
 
 const App = () => {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -90,24 +113,31 @@ const App = () => {
     debouncedSearch(event.target.value);
   };
 
-  // Load more articles when user scrolls to bottom
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (
       window.innerHeight + window.scrollY >=
       document.body.offsetHeight - 500
     ) {
       if (remainingArticles.length > 0) {
-        const moreArticles = remainingArticles.slice(0, 10);
-        setDisplayedArticles([...displayedArticles, ...moreArticles]);
-        setRemainingArticles(remainingArticles.slice(10));
+        setDisplayedArticles((prevDisplayedArticles) => {
+          const moreArticles = remainingArticles.slice(0, 10);
+          return [...prevDisplayedArticles, ...moreArticles];
+        });
+        setRemainingArticles((prevRemainingArticles) =>
+          prevRemainingArticles.slice(10)
+        );
       }
     }
-  };
+  }, [remainingArticles]);
+
+  const handleScrollRef = useRef(handleScroll); // Create a ref to the handleScroll function
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [displayedArticles, remainingArticles]);
+    window.addEventListener("scroll", handleScrollRef.current); // Use the ref to attach the event listener
+    return () => {
+      window.removeEventListener("scroll", handleScrollRef.current); // Use the ref to remove the event listener
+    };
+  }, []);
 
   return (
     <div>
@@ -145,17 +175,7 @@ const App = () => {
                         <li key={index}>
                           <h3>{article.title}</h3>
                           <p>{article.publishedAt.toString()}</p>
-                          {favorites.some(
-                            (favorite) => favorite.title === article.title
-                          ) ? (
-                            <button onClick={() => handleRemove(article)}>
-                              Remove
-                            </button>
-                          ) : (
-                            <button onClick={() => handleClick(article)}>
-                              Bookmark
-                            </button>
-                          )}
+                          <ArticleActions article={article} />
                         </li>
                       ))}
                     </ul>

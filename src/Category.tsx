@@ -1,10 +1,10 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Article } from "./App";
 import { addArticle, removeArticle } from "./FavoriteArticlesSlice";
 import { RootState } from "./store";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import ArticleActions from "./ArticleActions";
 
 interface CategoryProps {
   articlesByCategory: { [key: string]: Article[] };
@@ -46,11 +46,7 @@ const Category: React.FC<CategoryProps> = ({ articlesByCategory }) => {
           <li key={index}>
             <h3>{article.title}</h3>
             <p>{article.publishedAt.toString()}</p>
-            {favorites.some((favorite) => favorite.title === article.title) ? (
-              <button onClick={() => handleRemove(article)}>Remove</button>
-            ) : (
-              <button onClick={() => handleClick(article)}>Bookmark</button>
-            )}
+            <ArticleActions article={article} />
           </li>
         ))}
       </ul>
