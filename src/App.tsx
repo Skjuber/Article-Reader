@@ -14,10 +14,6 @@ export interface Article {
   publishedAt: Date;
 }
 
-const formatDate = (date: Date) => {
-  return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-};
-
 const App = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -130,7 +126,7 @@ const App = () => {
                 {favorites.map((article, index) => (
                   <li key={index}>
                     <h3>{article.title}</h3>
-                    <p>{formatDate(article.publishedAt)}</p>
+                    <p>{article.publishedAt.toString()}</p>
                     <button onClick={() => handleRemove(article)}>
                       Remove
                     </button>
@@ -147,7 +143,7 @@ const App = () => {
                       {articles.map((article, index) => (
                         <li key={index}>
                           <h3>{article.title}</h3>
-                          <p>{formatDate(article.publishedAt)}</p>
+                          <p>{article.publishedAt.toString()}</p>
                           {favorites.some(
                             (favorite) => favorite.title === article.title
                           ) ? (
