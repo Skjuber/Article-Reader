@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import { Routes, Route, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Category from "./Category";
+import Category from "./components/Category";
 import LatestNews from "./components/LatestNews";
 import { addArticle, removeArticle } from "./FavoriteArticlesSlice";
 import { RootState } from "./store";
