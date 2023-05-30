@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Routes, Route, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,7 +9,7 @@ import {
   removeArticle,
 } from "./components/store/reducers/FavoriteArticlesSlice";
 import { RootState } from "./components/store/store";
-import _ from "lodash";
+import Search from "./Search";
 import "./App.scss";
 
 export interface Article {
@@ -98,19 +98,12 @@ const App: React.FC = () => {
     return groups;
   }, {});
 
-  const debouncedSearch = useCallback(
-    _.debounce((query: string) => {
-      setSearchQuery(query);
-    }, 200),
-    []
-  );
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.stopPropagation();
-    debouncedSearch(event.target.value);
+  const handleSearch = (query: string) => {
+    // Update the search query and filter the articles
+    setSearchQuery(query);
   };
 
-  const handleScroll = useCallback(() => {
+  const handleScroll = () => {
     if (
       window.innerHeight + window.scrollY >=
       document.body.offsetHeight - 500
@@ -125,7 +118,7 @@ const App: React.FC = () => {
         );
       }
     }
-  }, [remainingArticles]);
+  };
 
   const handleScrollRef = useRef(handleScroll); // Create a ref to the handleScroll function
 
@@ -139,11 +132,7 @@ const App: React.FC = () => {
   return (
     <div>
       <h1>Newsy</h1>
-      <input
-        type="text"
-        placeholder="Search articles"
-        onChange={handleSearchChange}
-      />
+      <Search onSearch={handleSearch} />
       <Routes>
         <Route
           path="/"
