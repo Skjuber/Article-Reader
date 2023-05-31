@@ -4,6 +4,7 @@ import { Article } from "../../App";
 import ArticleActions from "../store/reducers/ArticleActions";
 import LatestNews from "../UI/LatestNews";
 import Header from "./Header";
+import ArticlesList from "./ArticlesList";
 import "./Homepage.scss";
 
 interface HomepageProps {
@@ -28,17 +29,7 @@ const Homepage: React.FC<HomepageProps> = ({
           <li>You do not have any bookmarked articles!</li>
         </ul>
       ) : (
-        <ul>
-          {favorites.map((article, index) => (
-            <li key={index}>
-              <div className="article-header">
-                <h3>{article.title}</h3>
-                <ArticleActions article={article} />
-              </div>
-              <p>{article.publishedAt.toString()}</p>
-            </li>
-          ))}
-        </ul>
+        <ArticlesList articles={favorites} />
       )}
       <h1>Articles by category</h1>
       {Object.entries(articlesByCategory).map(([category, articles], index) => (
@@ -46,17 +37,7 @@ const Homepage: React.FC<HomepageProps> = ({
           <h2>
             <Link to={`/${category}`}>{category}</Link>
           </h2>
-          <ul>
-            {articles.map((article, index) => (
-              <li key={index}>
-                <div className="article-header">
-                  <h3>{article.title}</h3>
-                  <ArticleActions article={article} />
-                </div>
-                <p>{article.publishedAt.toString()}</p>
-              </li>
-            ))}
-          </ul>
+          <ArticlesList articles={articles} />
         </div>
       ))}
       <LatestNews allArticles={displayedArticles} />
