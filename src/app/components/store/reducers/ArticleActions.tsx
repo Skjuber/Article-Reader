@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
 import { addArticle, removeArticle } from "./FavoriteArticlesSlice";
-import { Article } from "../../../types";
+import { Article } from "../../utils/types";
 import { FiBookmark } from "react-icons/fi";
 import { FaBookmark } from "react-icons/fa";
 

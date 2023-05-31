@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "./components/store/store";
 import Category from "./components/UI/Category";
 import Homepage from "./components/UI/Homepage";
-import { Article } from "./types";
+import { Article } from "./components/utils/types";
 
 import "./App.scss";
 
