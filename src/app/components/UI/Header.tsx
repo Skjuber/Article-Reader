@@ -1,5 +1,5 @@
 import React from "react";
-import Search from "./Search";
+import Search from "../utils/Search";
 
 interface HeaderProps {
   onSearch: (query: string) => void;
