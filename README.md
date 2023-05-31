@@ -1,6 +1,8 @@
 # Article-Reader
 
-Article-Reader is is a simple and user-friendly frontend application built using React and Sass/SCSS. It is designed to aggregate and display articles in an organized, categorized, and chronological order. You can browse, search, bookmark your favorite articles, and view them by category.
+Article-Reader is is a simple frontend application built using React, Typescript and Sass/SCSS. It is designed to aggregate and display articles in an organized, categorized, and chronological order. You can browse, search, bookmark your favorite articles, and view them by category.
+
+When designing Article-Reader, a key consideration was to create a user-friendly and intuitive interface. To achieve this, a clean and organized layout was chosen, with articles displayed in a categorized and chronological order on the homepage. Categorization allows users to easily navigate and explore articles based on their interests, while chronological sorting ensures that the latest news is prominently featured. Additionally, the decision to implement infinite scroll functionality in the latest news widget was made to provide a seamless browsing experience, eliminating the need for manual pagination. This design choice allows users to effortlessly scroll through articles, dynamically loading new content as they reach the end of the page. The search filter feature was also implemented to empower users with the ability to search for specific articles by name, further enhancing their browsing experience and enabling them to find relevant content quickly. By prioritizing a user-centric approach in the design, Article-Reader aims to deliver a smooth and efficient news-reading experience.
 
 Article-Reader employs the power of the New York Times API to fetch real-time and authentic articles, providing you with a reliable and current newsfeed.
 
