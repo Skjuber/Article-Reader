@@ -13,15 +13,11 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   padding-left: 6px;
-
-  @media (max-width: 769px) {
-    margin-left: 90px;
-  }
 }
 
 @mixin button-style-mobile {
   @media (max-width: 768px) {
-    margin-left: -10px;
+    margin-left: 50px;
   }
 }
 
