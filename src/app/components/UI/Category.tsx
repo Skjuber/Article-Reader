@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { Article } from "../../App";
+import { Article } from "../../types";
+
 import ArticlesList from "./ArticlesList";
 import "./Category.scss";
 

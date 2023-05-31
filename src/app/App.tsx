@@ -5,13 +5,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "./components/store/store";
 import Category from "./components/UI/Category";
 import Homepage from "./components/UI/Homepage";
-import "./App.scss";
+import { Article } from "./types";
 
-export interface Article {
-  title: string;
-  category: string;
-  publishedAt: Date;
-}
+import "./App.scss";
 
 const App: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);

@@ -1,5 +1,6 @@
 import React from "react";
-import { Article } from "../../App";
+import { Article } from "../../types";
+
 import ArticleActions from "../store/reducers/ArticleActions";
 
 interface ArticlesListProps {

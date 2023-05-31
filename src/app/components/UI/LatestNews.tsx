@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { Article } from "../../App";
+import { Article } from "../../types";
 
 interface LatestNewsProps {
   allArticles: Article[];
