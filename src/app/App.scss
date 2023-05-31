@@ -1,3 +1,4 @@
+@import "./components/utils/mixins";
 /* Colors */
 :root {
   --primary-color: #282c34;
@@ -74,15 +75,7 @@ input[type="text"]::placeholder-shown {
 
 /* Buttons */
 button {
-  color: var(--text-color);
-  background-color: var(--button-color);
-  border: none;
-  padding: 0.5em;
-  text-decoration: none;
-  margin: 0.5em 0;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  padding-left: 6px;
+  @include button-style;
 }
 
 /* Links */
