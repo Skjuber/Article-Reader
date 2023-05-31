@@ -1,9 +1,11 @@
+@import "../utils/mixins";
+
 .article-header {
-  display: flex;
-  align-items: center;
+  @include flexbox-center;
 }
 
 .article-action {
+  @include button-style;
   border-radius: 10px;
   margin-left: 10px;
   background-color: var(--secondary-color);
