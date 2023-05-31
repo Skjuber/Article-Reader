@@ -15,6 +15,12 @@
   padding-left: 6px;
 }
 
+@mixin button-style-mobile {
+  @media (max-width: 768px) {
+    margin-left: -10px;
+  }
+}
+
 @mixin category-heading-style {
   color: var(--link-color);
 }

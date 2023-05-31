@@ -26,7 +26,9 @@ const Category: React.FC<CategoryProps> = ({ articlesByCategory }) => {
     <div>
       <h1 className="categories-heading">{category}</h1>
       <ArticlesList articles={articles} />
-      <Link to="/">Return to Home</Link>
+      <Link to="/" className="return-home-button">
+        Return to Home
+      </Link>
     </div>
   );
 };
