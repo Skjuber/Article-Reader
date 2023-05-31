@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Article } from "../../App";
-import ArticleActions from "../store/reducers/ArticleActions";
 import LatestNews from "../UI/LatestNews";
 import Header from "./Header";
 import ArticlesList from "./ArticlesList";
