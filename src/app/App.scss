@@ -1,5 +1,5 @@
 @import "./components/utils/mixins";
-/* Colors */
+
 :root {
   --primary-color: #282c34;
   --secondary-color: #f50057;
@@ -10,12 +10,10 @@
   --favorite-color: #ff6347;
 }
 
-/* Typography */
 :root {
   --font-family: Arial, sans-serif;
 }
 
-/* Body styles */
 body {
   background-color: var(--background-color);
   color: var(--text-color);
@@ -23,7 +21,6 @@ body {
   padding-left: 6px;
 }
 
-/* Headings */
 h1 {
   color: var(--primary-color);
   padding-left: 6px;
@@ -34,14 +31,13 @@ h2 {
   padding-left: 6px;
 }
 
-/* Form input */
 input[type="text"] {
   width: 40%;
   padding: 0.5em;
   margin: 0.2em 0;
   display: inline-block;
   border: 1px solid var(--primary-color);
-  border-radius: 20px; /* Adjust the value to control the oval shape */
+  border-radius: 20px;
   outline: none;
   transition: border-color 0.3s ease;
   font-size: 1rem;
@@ -73,19 +69,16 @@ input[type="text"]::placeholder-shown {
   font-style: italic;
 }
 
-/* Buttons */
 button {
   @include button-style;
 }
 
-/* Links */
 a {
   color: var(--link-color);
   text-decoration: none;
   padding-left: 6px;
 }
 
-/* Lists */
 ul {
   list-style: none;
   padding: 0;

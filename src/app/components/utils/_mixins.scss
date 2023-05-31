@@ -14,3 +14,18 @@
   transition: background-color 0.3s ease;
   padding-left: 6px;
 }
+
+@mixin category-heading-style {
+  color: var(--link-color);
+}
+
+@mixin article-header-categories-style {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin title-categories-style {
+  display: flex;
+  align-items: center;
+}
