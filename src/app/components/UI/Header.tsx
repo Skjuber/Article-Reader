@@ -8,7 +8,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ onSearch }) => {
   return (
     <div>
-      <h1>Newsy</h1>
+      <h1>Article-reader</h1>
       <Search onSearch={onSearch} />
     </div>
   );
