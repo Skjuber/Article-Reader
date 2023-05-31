@@ -35,13 +35,41 @@ h2 {
 
 /* Form input */
 input[type="text"] {
-  width: 80%;
+  width: 40%;
   padding: 0.5em;
-  margin: 0.5em auto;
-  display: block;
+  margin: 0.2em 0;
+  display: inline-block;
   border: 1px solid var(--primary-color);
-  border-radius: 5px;
-  padding-left: 6px;
+  border-radius: 20px; /* Adjust the value to control the oval shape */
+  outline: none;
+  transition: border-color 0.3s ease;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+input[type="text"]:focus {
+  border-color: #be29ec;
+}
+
+input[type="text"]::placeholder {
+  color: var(--primary-color);
+}
+
+input[type="text"]::-webkit-input-placeholder {
+  color: var(--primary-color);
+}
+
+input[type="text"]::-moz-placeholder {
+  color: var(--primary-color);
+  opacity: 1;
+}
+
+input[type="text"]:-ms-input-placeholder {
+  color: var(--primary-color);
+}
+
+input[type="text"]::placeholder-shown {
+  font-style: italic;
 }
 
 /* Buttons */
