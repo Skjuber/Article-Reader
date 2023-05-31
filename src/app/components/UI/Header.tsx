@@ -1,5 +1,6 @@
 import React from "react";
 import Search from "./Search";
+import "./Header.scss";
 
 interface HeaderProps {
   onSearch: (query: string) => void;
@@ -7,7 +8,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onSearch }) => {
   return (
-    <div>
+    <div className="header">
       <h1>Article-reader</h1>
       <Search onSearch={onSearch} />
     </div>
