@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
 import { addArticle, removeArticle } from "./FavoriteArticlesSlice";
 import { Article } from "../../../App";
-import { FiBookmark, FiMinus } from "react-icons/fi";
+import { FiBookmark } from "react-icons/fi";
+import { FaBookmark } from "react-icons/fa";
 
 interface ArticleActionsProps {
   article: Article;
@@ -33,7 +34,7 @@ const ArticleActions: React.FC<ArticleActionsProps> = ({ article }) => {
       title={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
       className="article-action"
     >
-      {isFavorite ? <FiMinus /> : <FiBookmark />}
+      {isFavorite ? <FaBookmark /> : <FiBookmark />}
     </button>
   );
 };
