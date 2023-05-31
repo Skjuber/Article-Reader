@@ -4,6 +4,10 @@ Article-Reader is is a simple and user-friendly frontend application built using
 
 Article-Reader employs the power of the New York Times API to fetch real-time and authentic articles, providing you with a reliable and current newsfeed.
 
+In addition to its features mentioned above, Article-Reader also leverages the capabilities of the browser's Local Storage to enhance the user experience. The application utilizes Local Storage for storing the state of bookmarked articles.
+
+When a user bookmarks an article, the relevant data is saved to the Local Storage, allowing the application to remember the user's preferences even after closing and reopening the browser. This ensures that the bookmarked articles remain accessible and can be easily retrieved by the user whenever needed.
+
 ## Deployment
 
 Deployment of the application is avaiable on the following link: https://article-reader.vercel.app/
