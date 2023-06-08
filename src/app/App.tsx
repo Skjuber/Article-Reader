@@ -25,6 +25,7 @@ const App: React.FC = () => {
     axios
       .get(url)
       .then((response) => {
+        console.log(response);
         let articles = response.data.response.docs
           // Filter if there is no Category.title present in api
           .filter((doc: any) => doc.section_name)
@@ -69,31 +70,31 @@ const App: React.FC = () => {
     setSearchQuery(query);
   };
 
-  const handleScroll = () => {
-    if (
-      window.innerHeight + window.scrollY >=
-      document.body.offsetHeight - 500
-    ) {
-      if (remainingArticles.length > 0) {
-        setDisplayedArticles((prevDisplayedArticles) => {
-          const moreArticles = remainingArticles.slice(0, 10);
-          return [...prevDisplayedArticles, ...moreArticles];
-        });
-        setRemainingArticles((prevRemainingArticles) =>
-          prevRemainingArticles.slice(10)
-        );
-      }
-    }
-  };
+  // const handleScroll = () => {
+  //   if (
+  //     window.innerHeight + window.scrollY >=
+  //     document.body.offsetHeight - 500
+  //   ) {
+  //     if (remainingArticles.length > 0) {
+  //       setDisplayedArticles((prevDisplayedArticles) => {
+  //         const moreArticles = remainingArticles.slice(0, 10);
+  //         return [...prevDisplayedArticles, ...moreArticles];
+  //       });
+  //       setRemainingArticles((prevRemainingArticles) =>
+  //         prevRemainingArticles.slice(10)
+  //       );
+  //     }
+  //   }
+  // };
 
-  const handleScrollRef = useRef(handleScroll); // Create a ref to the handleScroll function
+  // const handleScrollRef = useRef(handleScroll); // Create a ref to the handleScroll function
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScrollRef.current); // Use the ref to attach the event listener
-    return () => {
-      window.removeEventListener("scroll", handleScrollRef.current); // Use the ref to remove the event listener
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScrollRef.current); // Use the ref to attach the event listener
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScrollRef.current); // Use the ref to remove the event listener
+  //   };
+  // }, []);
 
   return (
     <Routes>

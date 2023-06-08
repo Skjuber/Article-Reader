@@ -33,6 +33,8 @@ export const favoriteArticlesSlice = createSlice({
     },
   },
 });
+console.log(favoriteArticlesSlice.reducer);
+console.log(favoriteArticlesSlice.actions);
 
 export const { addArticle, removeArticle } = favoriteArticlesSlice.actions;
 
