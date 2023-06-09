@@ -22,7 +22,7 @@ const LatestNews: React.FC<LatestNewsProps> = ({ allArticles }) => {
   };
 
   return (
-    <div>
+    <div className="div5">
       <h1>Latest News</h1>
       <InfiniteScroll
         dataLength={displayedArticles.length} // This is important field to render the next data

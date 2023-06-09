@@ -21,7 +21,7 @@ const Homepage: React.FC<HomepageProps> = ({
   handleSearch,
 }) => {
   return (
-    <div>
+    <div className="parent">
       <Header onSearch={handleSearch} />
       <h2>Favorites</h2>
       {favorites.length === 0 ? (
@@ -40,7 +40,9 @@ const Homepage: React.FC<HomepageProps> = ({
           <ArticlesList articles={articles} />
         </div>
       ))}
-      <LatestNews allArticles={displayedArticles} />
+      <div className="div5">
+        <LatestNews allArticles={displayedArticles} />
+      </div>
     </div>
   );
 };
